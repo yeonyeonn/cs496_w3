@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     /** Default device is CPU */
     private var device = Device.CPU
 
-    // [inserted]
+    //[inserted]
     private lateinit var image: ImageView
 
     private lateinit var tvScore: TextView
@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // keep screen on while app is running
 
-        // [inserted]
+        //[inserted]
         var displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getRealMetrics(displayMetrics)
 
@@ -165,6 +165,7 @@ class MainActivity : AppCompatActivity() {
             requestPermission()
         }
 
+        //[inserted]
         /*
         surfaceView.holder.addCallback( {
 
@@ -205,7 +206,7 @@ class MainActivity : AppCompatActivity() {
                         override fun onFPSListener(fps: Int) {
                             tvFPS.text = getString(R.string.tfe_pe_tv_fps, fps)
 
-                            // [inserted]
+                            //[inserted]
                             // surfaceview 크기
                             Log.d("크기 open getWidth()", ""+ surfaceView.width)
                             Log.d("크기 getheight()", ""+ surfaceView.height)

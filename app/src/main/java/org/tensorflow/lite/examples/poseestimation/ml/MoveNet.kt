@@ -168,7 +168,7 @@ class MoveNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
         lastInferenceTimeNanos =
             SystemClock.elapsedRealtimeNanos() - inferenceStartTimeNanos
 
-        // [inserted]
+        //[inserted]
         Log.d("movenet 좌표", "내용" + keyPoints)
         return listOf(Person(keyPoints = keyPoints, score = totalScore / numKeyPoints))
     }

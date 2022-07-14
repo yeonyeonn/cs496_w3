@@ -109,7 +109,7 @@ class MoveNetMultiPose(
      * to the coordinates corresponding to the input image.
      */
     private fun resizeKeypoint(x: Float, y: Float): PointF {
-        // [inserted]
+        //[inserted]
         Log.d("좌표", ""+ PointF(resizeX(x), resizeY(y)))
         return PointF(resizeX(x), resizeY(y))
     }
@@ -223,7 +223,7 @@ class MoveNetMultiPose(
                 }
             }
 
-            // [inserted]
+            //[inserted]
             // 여기선 출력 안 됨.. 왜?
             Log.d("person 좌표", "" + persons.get(0).keyPoints)
 
@@ -252,7 +252,7 @@ class MoveNetMultiPose(
                     )
                 }
 
-                // [inserted]
+                //[inserted]
                 // traker 좌표만 출력됨 Inserted
                 trackPersons.add(Person(it.id, resizeKeyPoint, resizeBoundingBox, it.score))
                 Log.d("traker 좌표", "" + persons.get(0).keyPoints)

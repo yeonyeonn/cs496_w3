@@ -39,6 +39,7 @@ enum class BodyPart(val position: Int) {
     companion object{
         private val map = values().associateBy(BodyPart::position)
         fun fromInt(position: Int): BodyPart {
+            //[edited]
             var body : BodyPart = map.getValue(position)
             Log.d("body 내용", "내용:" + body)
             return body
