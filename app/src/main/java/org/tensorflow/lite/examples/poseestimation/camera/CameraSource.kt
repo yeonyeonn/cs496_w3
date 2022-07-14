@@ -112,9 +112,9 @@ class CameraSource(
                 yuvConverter.yuvToRgb(image, imageBitmap)
                 // Create rotated version for portrait display
                 val rotateMatrix = Matrix()
-//                rotateMatrix.postRotate(90.0f) //REMOVED
+//                rotateMatrix.postRotate(90.0f) //[removed]
 
-                // handle portrait display problem //INSERTED
+                // handle portrait display problem //[inserted]
                 if (activity.windowManager.defaultDisplay.rotation == Surface.ROTATION_90) {
                     rotateMatrix.postRotate(0.0f)
                 } else if (activity.windowManager.defaultDisplay.rotation == Surface.ROTATION_270) {
@@ -177,7 +177,7 @@ class CameraSource(
         for (cameraId in cameraManager.cameraIdList) {
             val characteristics = cameraManager.getCameraCharacteristics(cameraId)
 
-//            // We don't use a front facing camera in this sample.  //REMOVED
+//            // We don't use a front facing camera in this sample.  //[removed]
 //            val cameraDirection = characteristics.get(CameraCharacteristics.LENS_FACING)
 //            if (cameraDirection != null &&
 //                cameraDirection == CameraCharacteristics.LENS_FACING_FRONT
@@ -185,7 +185,7 @@ class CameraSource(
 //                continue
 //            }
 
-            // Try using front facing camera in this sample. //INSERTED
+            // Try using front facing camera in this sample. //[inserted]
             val cameraDirection = characteristics.get(CameraCharacteristics.LENS_FACING)
             if (cameraDirection != null &&
                 cameraDirection == CameraCharacteristics.LENS_FACING_BACK
