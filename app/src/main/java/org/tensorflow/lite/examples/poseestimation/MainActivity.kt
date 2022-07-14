@@ -238,7 +238,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 isPoseClassifier()
                 lifecycleScope.launch(Dispatchers.Main) {
-                    cameraSource?.initCamera(this@MainActivity) //EDITED
+                    cameraSource?.initCamera(this@MainActivity) //[edited]
                 }
             }
             createPoseEstimator()
