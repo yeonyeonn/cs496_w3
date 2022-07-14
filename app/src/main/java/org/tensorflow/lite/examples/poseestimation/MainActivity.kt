@@ -22,6 +22,9 @@ import android.app.Dialog
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Process
+import android.util.DisplayMetrics
+import android.util.Log
+import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
 import android.view.WindowManager
@@ -56,6 +59,9 @@ class MainActivity : AppCompatActivity() {
 
     /** Default device is CPU */
     private var device = Device.CPU
+
+    // [inserted]
+    private lateinit var image: ImageView
 
     private lateinit var tvScore: TextView
     private lateinit var tvFPS: TextView
@@ -134,6 +140,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // keep screen on while app is running
+
+        // [inserted]
+        var displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         tvScore = findViewById(R.id.tvScore)
         tvFPS = findViewById(R.id.tvFps)
@@ -153,6 +164,11 @@ class MainActivity : AppCompatActivity() {
         if (!isCameraPermissionGranted()) {
             requestPermission()
         }
+
+        /*
+        surfaceView.holder.addCallback( {
+
+        }) */
     }
 
     override fun onStart() {
@@ -188,6 +204,11 @@ class MainActivity : AppCompatActivity() {
                     CameraSource(surfaceView, object : CameraSource.CameraSourceListener {
                         override fun onFPSListener(fps: Int) {
                             tvFPS.text = getString(R.string.tfe_pe_tv_fps, fps)
+
+                            // [inserted]
+                            // surfaceview 크기
+                            Log.d("크기 open getWidth()", ""+ surfaceView.width)
+                            Log.d("크기 getheight()", ""+ surfaceView.height)
                         }
 
                         override fun onDetectedInfo(

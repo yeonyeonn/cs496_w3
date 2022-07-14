@@ -17,6 +17,7 @@ limitations under the License.
 package org.tensorflow.lite.examples.poseestimation.ml
 
 import android.content.Context
+import android.util.Log
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.examples.poseestimation.data.Person
 import org.tensorflow.lite.support.common.FileUtil
@@ -64,6 +65,7 @@ class PoseClassifier(
         outputTensor.forEachIndexed { index, score ->
             output.add(Pair(labels[index], score))
         }
+
         return output
     }
 

@@ -180,6 +180,9 @@ class PoseNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
             )
             totalScore += confidenceScores[idx]
         }
+
+        // [inserted]
+        Log.d("poseNet 좌표", "" + keypointList.toList())
         return Person(keyPoints = keypointList.toList(), score = totalScore / numKeypoints)
     }
 

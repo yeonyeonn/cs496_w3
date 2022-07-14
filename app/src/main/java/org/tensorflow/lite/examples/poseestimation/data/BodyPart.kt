@@ -16,6 +16,8 @@ limitations under the License.
 
 package org.tensorflow.lite.examples.poseestimation.data
 
+import android.util.Log
+
 enum class BodyPart(val position: Int) {
     NOSE(0),
     LEFT_EYE(1),
@@ -36,6 +38,10 @@ enum class BodyPart(val position: Int) {
     RIGHT_ANKLE(16);
     companion object{
         private val map = values().associateBy(BodyPart::position)
-        fun fromInt(position: Int): BodyPart = map.getValue(position)
+        fun fromInt(position: Int): BodyPart {
+            var body : BodyPart = map.getValue(position)
+            Log.d("body 내용", "내용:" + body)
+            return body
+        }
     }
 }

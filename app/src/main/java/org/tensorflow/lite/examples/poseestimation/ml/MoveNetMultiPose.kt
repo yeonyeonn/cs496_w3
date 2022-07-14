@@ -21,6 +21,7 @@ import android.graphics.Bitmap
 import android.graphics.PointF
 import android.graphics.RectF
 import android.os.SystemClock
+import android.util.Log
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.examples.poseestimation.data.BodyPart
@@ -108,6 +109,8 @@ class MoveNetMultiPose(
      * to the coordinates corresponding to the input image.
      */
     private fun resizeKeypoint(x: Float, y: Float): PointF {
+        // [inserted]
+        Log.d("좌표", ""+ PointF(resizeX(x), resizeY(y)))
         return PointF(resizeX(x), resizeY(y))
     }
 
@@ -219,6 +222,11 @@ class MoveNetMultiPose(
                     key.coordinate = resizeKeypoint(key.coordinate.x, key.coordinate.y)
                 }
             }
+
+            // [inserted]
+            // 여기선 출력 안 됨.. 왜?
+            Log.d("person 좌표", "" + persons.get(0).keyPoints)
+
             return persons
         } else {
             val trackPersons = mutableListOf<Person>()
@@ -243,7 +251,12 @@ class MoveNetMultiPose(
                         resizeY(boundingBox.bottom)
                     )
                 }
+
+                // [inserted]
+                // traker 좌표만 출력됨 Inserted
                 trackPersons.add(Person(it.id, resizeKeyPoint, resizeBoundingBox, it.score))
+                Log.d("traker 좌표", "" + persons.get(0).keyPoints)
+                Log.d("trackPersons 좌표", "" + trackPersons.get(0).keyPoints)
             }
             return trackPersons
         }
