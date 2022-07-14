@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TensorFlow Lite Pose Estimation Android Demo
 
 ### Overview
@@ -71,3 +72,6 @@ If you explicitly want to download the model, you can download it from here:
 _Please do not delete the assets folder content_. If you explicitly deleted the
  files, then please choose `Build` > `Rebuild` from menu to re-download the
  deleted model files into assets folder.
+=======
+# cs496_w3
+>>>>>>> 64efbef221271fcee1b29d2d9eb0ee0f0ec9cb25
