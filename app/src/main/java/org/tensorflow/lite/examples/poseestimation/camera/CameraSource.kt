@@ -17,7 +17,9 @@ limitations under the License.
 package org.tensorflow.lite.examples.poseestimation.camera
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.ImageFormat
 import android.graphics.Matrix
@@ -92,7 +94,7 @@ class CameraSource(
     private var imageReaderHandler: Handler? = null
     private var cameraId: String = ""
 
-    suspend fun initCamera() {
+    suspend fun initCamera(activity: Activity) {
         camera = openCamera(cameraManager, cameraId)
         imageReader =
             ImageReader.newInstance(PREVIEW_WIDTH, PREVIEW_HEIGHT, ImageFormat.YUV_420_888, 3)
@@ -110,7 +112,16 @@ class CameraSource(
                 yuvConverter.yuvToRgb(image, imageBitmap)
                 // Create rotated version for portrait display
                 val rotateMatrix = Matrix()
-                rotateMatrix.postRotate(90.0f)
+//                rotateMatrix.postRotate(90.0f) //REMOVED
+
+                // handle portrait display problem //INSERTED
+                if (activity.windowManager.defaultDisplay.rotation == Surface.ROTATION_90) {
+                    rotateMatrix.postRotate(0.0f)
+                } else if (activity.windowManager.defaultDisplay.rotation == Surface.ROTATION_270) {
+                    rotateMatrix.postRotate(180.0f)
+                } else {
+                    rotateMatrix.postRotate(270.0f)
+                }
 
                 val rotatedBitmap = Bitmap.createBitmap(
                     imageBitmap, 0, 0, PREVIEW_WIDTH, PREVIEW_HEIGHT,
@@ -166,10 +177,18 @@ class CameraSource(
         for (cameraId in cameraManager.cameraIdList) {
             val characteristics = cameraManager.getCameraCharacteristics(cameraId)
 
-            // We don't use a front facing camera in this sample.
+//            // We don't use a front facing camera in this sample.  //REMOVED
+//            val cameraDirection = characteristics.get(CameraCharacteristics.LENS_FACING)
+//            if (cameraDirection != null &&
+//                cameraDirection == CameraCharacteristics.LENS_FACING_FRONT
+//            ) {
+//                continue
+//            }
+
+            // Try using front facing camera in this sample. //INSERTED
             val cameraDirection = characteristics.get(CameraCharacteristics.LENS_FACING)
             if (cameraDirection != null &&
-                cameraDirection == CameraCharacteristics.LENS_FACING_FRONT
+                cameraDirection == CameraCharacteristics.LENS_FACING_BACK
             ) {
                 continue
             }
